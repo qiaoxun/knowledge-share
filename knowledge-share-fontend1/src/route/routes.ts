@@ -7,6 +7,7 @@ import UserEdit from '@/pages/user/edit'
 import RoleList from '@/pages/role/list'
 
 import AuthTest from '@/pages/test'
+import TestEcharts from '@/pages/test-echarts'
 
 /**
  * path 跳转的路径
@@ -76,6 +77,13 @@ const menus = [
     exact: true,
     key: '/403',
     component: ErrorPage
+  },
+  {
+    path: '/test-echarts',
+    name: 'Echart Demo',
+    exact: true,
+    key: 'echart:test:view',
+    component: TestEcharts
   }
 ]
 

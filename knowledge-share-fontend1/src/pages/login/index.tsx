@@ -58,6 +58,10 @@ const LoginForm: FC<Props> = ({
         {
           code: 'auth:test:view',
           name: '查看权限测试页'
+        },
+        {
+          code: 'echart:test:view',
+          name: '查看 echarts test Demo'
         }
       ]
     }

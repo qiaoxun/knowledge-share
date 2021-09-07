@@ -2,7 +2,8 @@ import {
   HomeOutlined,
   BankOutlined,
   UserOutlined,
-  AuditOutlined
+  AuditOutlined,
+  RiseOutlined
 } from '@ant-design/icons'
 
 const menus = [
@@ -47,6 +48,12 @@ const menus = [
     name: '测试权限页',
     key: 'auth:test:view',
     icon: BankOutlined
+  },
+  {
+    path: '/test-echarts',
+    name: 'Echart Demo页',
+    key: 'echart:test:view',
+    icon: RiseOutlined
   }
 ]
 
