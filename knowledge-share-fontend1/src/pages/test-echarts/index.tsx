@@ -23,14 +23,13 @@ const TestEcharts: FC = () => {
 
   const scatterData = getVirtulData()
   let calendarCom: RefType
+  let relationCom: RefType
 
   const getPieSeries = () => {
     return scatterData.map((item, index) => {
       const center = calendarCom
         .getEchartsInstance()
         .convertToPixel('calendar', item)
-      console.log(item)
-      console.log(center)
       return {
         id: `${index}pie`,
         type: 'pie',
@@ -51,7 +50,7 @@ const TestEcharts: FC = () => {
     })
   }
 
-  const getOption3 = () => {
+  const getOption1 = () => {
     return {
       tooltip: {},
       legend: {
@@ -113,6 +112,99 @@ const TestEcharts: FC = () => {
     }
   }, 10)
 
+  const URL =
+    'https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples/data/asset/data/les-miserables.json'
+
+  interface nodeProps {
+    category: Number;
+    id: String;
+    name: String;
+    symbolSize: Number;
+    value: Number;
+    x: Number;
+    y: Number;
+  }
+
+  interface graphDataProps {
+    nodes: nodeProps[];
+    links: any[];
+    categories: any[];
+  }
+
+  fetch(URL)
+    .then((res: any) => {
+      return res.json()
+    })
+    .then((graph: graphDataProps) => {
+      // for (let i = 0; i < graph.nodes.length; i += 1) {
+      //   graph.nodes[i] = 5
+      // }
+      // graph.nodes.forEach((node: nodeProps) => {
+      //   node.symbolSize = 5
+      // })
+      const option = {
+        title: {
+          text: 'Les Miserables',
+          subtext: 'Default layout',
+          top: 'bottom',
+          left: 'right'
+        },
+        tooltip: {},
+        legend: [
+          {
+            // selectedMode: 'single',
+            data: graph.categories.map((a) => {
+              return a.name
+            })
+          }
+        ],
+        series: [
+          {
+            name: 'Les Miserables',
+            type: 'graph',
+            layout: 'force',
+            data: graph.nodes,
+            links: graph.links,
+            categories: graph.categories,
+            roam: true,
+            label: {
+              position: 'right'
+            },
+            force: {
+              repulsion: 100
+            }
+          }
+        ]
+      }
+      relationCom.getEchartsInstance().setOption(option)
+    })
+
+  const getOption2 = () => {
+    return {
+      title: {
+        text: 'Les Miserables',
+        subtext: 'Default layout',
+        top: 'bottom',
+        left: 'right'
+      },
+      tooltip: {},
+      series: [
+        {
+          name: 'Les Miserables',
+          type: 'graph',
+          layout: 'force',
+          roam: true,
+          label: {
+            position: 'right'
+          },
+          force: {
+            repulsion: 100
+          }
+        }
+      ]
+    }
+  }
+
   return (
     <div className="home" style={{ height: '100vh', padding: 20 }}>
       <Row gutter={16}>
@@ -122,7 +214,18 @@ const TestEcharts: FC = () => {
               ref={(e) => {
                 calendarCom = e
               }}
-              option={getOption3()}
+              option={getOption1()}
+              style={{ width: '100%', height: '500px' }}
+            />
+          </Card>
+        </Col>
+        <Col span={12} style={{ marginTop: 20 }}>
+          <Card>
+            <ReactEcharts
+              ref={(e) => {
+                relationCom = e
+              }}
+              option={getOption2()}
               style={{ width: '100%', height: '500px' }}
             />
           </Card>
