@@ -4,6 +4,7 @@ import ReactEcharts from 'echarts-for-react'
 import * as echarts from 'echarts'
 
 const TestEcharts: FC = () => {
+  console.log('TestEcharts Rendered')
   const cellSize = [80, 80]
   const pieRadius = 30
 
@@ -93,7 +94,7 @@ const TestEcharts: FC = () => {
           label: {
             show: true,
             formatter(params) {
-              return echarts.format.formatTime('dd', params.value[0], true)
+              return echarts.time.format(params.value[0], '{dd}', false)
             },
             offset: [-cellSize[0] / 2 + 10, -cellSize[1] / 2 + 10],
             fontSize: 14
@@ -136,9 +137,9 @@ const TestEcharts: FC = () => {
       return res.json()
     })
     .then((graph: graphDataProps) => {
-      // for (let i = 0; i < graph.nodes.length; i += 1) {
-      //   graph.nodes[i] = 5
-      // }
+      for (let i = 0; i < graph.nodes.length; i += 1) {
+        graph.nodes[i].symbolSize = 5
+      }
       // graph.nodes.forEach((node: nodeProps) => {
       //   node.symbolSize = 5
       // })
@@ -168,15 +169,24 @@ const TestEcharts: FC = () => {
             categories: graph.categories,
             roam: true,
             label: {
+              show: true,
               position: 'right'
             },
             force: {
-              repulsion: 100
+              repulsion: 200
+            },
+            emphasis: {
+              focus: 'adjacency',
+              lineStyle: {
+                width: 10
+              }
             }
           }
         ]
       }
-      relationCom.getEchartsInstance().setOption(option)
+      if (relationCom) {
+        relationCom.getEchartsInstance().setOption(option)
+      }
     })
 
   const getOption2 = () => {
