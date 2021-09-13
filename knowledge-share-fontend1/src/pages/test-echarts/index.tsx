@@ -1,10 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Card, Row, Col } from 'antd'
 import ReactEcharts from 'echarts-for-react'
 import * as echarts from 'echarts'
 
 const TestEcharts: FC = () => {
   console.log('TestEcharts Rendered')
+  console.trace()
   const cellSize = [80, 80]
   const pieRadius = 30
 
@@ -50,6 +51,11 @@ const TestEcharts: FC = () => {
       }
     })
   }
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    document.title = 'You clicked 1 times'
+  })
 
   const getOption1 = () => {
     return {
@@ -168,6 +174,7 @@ const TestEcharts: FC = () => {
             links: graph.links,
             categories: graph.categories,
             roam: true,
+            edgeSymbol: ['circle', 'arrow'],
             label: {
               show: true,
               position: 'right'
