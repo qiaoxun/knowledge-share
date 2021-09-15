@@ -265,7 +265,8 @@ const TabPanes: FC<Props> = (props) => {
     e.preventDefault()
     setSelectedPanel(panel)
   }
-
+  console.log(panes)
+  console.log(curTab)
   return (
     <div>
       <Tabs
@@ -299,13 +300,7 @@ const TabPanes: FC<Props> = (props) => {
               </Dropdown>
             }
           >
-            {reloadPath !== pane.path ? (
-              <pane.content path={pane.path} />
-            ) : (
-              <div style={{ height: '100vh' }}>
-                <Alert message="刷新中..." type="info" />
-              </div>
-            )}
+            {activeKey}
           </TabPane>
         ))}
       </Tabs>

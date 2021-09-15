@@ -5,7 +5,6 @@ import * as echarts from 'echarts'
 
 const TestEcharts: FC = () => {
   console.log('TestEcharts Rendered')
-  console.trace()
   const cellSize = [80, 80]
   const pieRadius = 30
 
