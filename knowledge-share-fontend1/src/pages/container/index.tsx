@@ -33,6 +33,7 @@ interface PanesItemProps {
 }
 
 const Home: FC<Props> = (props) => {
+  console.log('Home')
   const [tabActiveKey, setTabActiveKey] = useState<string>('home')
   const [panesItem, setPanesItem] = useState<PanesItemProps>({
     title: '',
@@ -117,6 +118,7 @@ const Home: FC<Props> = (props) => {
       >
         <Header />
         <Layout.Content>
+          {console.log('TabPanes')}
           <TabPanes
             defaultActiveKey="home"
             panesItem={panesItem}

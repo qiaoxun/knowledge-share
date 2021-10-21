@@ -61,6 +61,7 @@ const TabPanes: FC<Props> = (props) => {
   const { pathname, search } = useLocation()
 
   const fullPath = pathname + search
+  console.log('fullPath', fullPath)
 
   // 记录当前打开的tab
   const storeTabs = useCallback(
@@ -149,7 +150,6 @@ const TabPanes: FC<Props> = (props) => {
     const { path } = panes.filter(
       (item: CommonObjectType) => item.key === targetKey
     )[0]
-    console.log(history)
     history.push({ pathname: path })
   }
 
@@ -275,7 +275,7 @@ const TabPanes: FC<Props> = (props) => {
         className={style.tabs}
         defaultActiveKey={defaultActiveKey}
         hideAdd
-        // onChange={onChange}
+        onChange={onChange}
         onEdit={onEdit}
         onTabClick={onTabClick}
         type="editable-card"
@@ -301,14 +301,14 @@ const TabPanes: FC<Props> = (props) => {
               </Dropdown>
             }
           >
-            {reloadPath !== pane.path ? (
+            {fullPath === pane.path ? (
               <pane.content path={pane.path} />
             ) : (
               <div style={{ height: '100vh' }}>
                 <Alert message="刷新中..." type="info" />
               </div>
             )}
-            {console.log(reloadPath !== pane.path)}
+            {console.log(pane.path)}
             {activeKey}
           </TabPane>
         ))}
