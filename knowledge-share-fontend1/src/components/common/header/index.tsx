@@ -14,6 +14,7 @@ const Header: FC<Props> = ({
   storeData: { theme, userInfo },
   setStoreData
 }) => {
+  console.log('Header =======')
   const history = useHistory()
   const { userName = '-' } = userInfo
   const firstWord = userName.slice(0, 1)

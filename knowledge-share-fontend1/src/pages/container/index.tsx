@@ -33,7 +33,7 @@ interface PanesItemProps {
 }
 
 const Home: FC<Props> = (props) => {
-  console.log('Home')
+  console.trace()
   const [tabActiveKey, setTabActiveKey] = useState<string>('home')
   const [panesItem, setPanesItem] = useState<PanesItemProps>({
     title: '',
@@ -54,6 +54,7 @@ const Home: FC<Props> = (props) => {
   const { token } = userInfo
 
   useEffect(() => {
+    console.log('Home useEffect')
     setStoreData('SET_COLLAPSED', document.body.clientWidth <= 1366)
 
     // 未登录
@@ -118,7 +119,7 @@ const Home: FC<Props> = (props) => {
       >
         <Header />
         <Layout.Content>
-          {console.log('TabPanes')}
+          {console.log('TabPanes tag')}
           <TabPanes
             defaultActiveKey="home"
             panesItem={panesItem}
